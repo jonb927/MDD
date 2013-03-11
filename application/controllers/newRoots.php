@@ -11,7 +11,7 @@ class NewRoots extends CI_Controller {
 		//$data['users'] = $this->mentor_model->getLatestNames();
 		
 		$this->load->view('header');
-		$this->load->view('');
+		$this->load->view('test');
 		$this->load->view('footer');
 	}
 }
