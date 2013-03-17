@@ -1,22 +1,17 @@
 $(function(){
-	//var request = new XMLHttpRequest();
-	//request.open('GET', 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&address=226+Camerton+Lane&citystatezip=19734', true);
-	//request.send();
+	//FINALLY it works needed to use a proxy 
+	url = "ba-simple-proxy.php?url=www.zillow.com%2Fwebservice%2FGetDeepSearchResults.htm%3Fzws-id%3DX1-ZWz1dff33xsnwr_1vfab%26address%3D226%2520Camerton%2520Lane%26citystatezip%3D19734";
 	
-	//$.get("http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&address=226+Camerton+Lane&citystatezip=19734",
-	//		function(data){
-	//			console.log(data);
-	//		});
-	
-	$.ajax({
+		$.ajax({
 		type: 'GET',
-		url: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&address=226+Camerton+Lane&citystatezip=19734',
+		url: url,
 		dataType: "xml",
 		success: function(response){
 			console.log(response);
 		}
 		});
-/*	.getJSON('http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&address=226+Camerton+Lane&citystatezip=19734', function(data){
-	console.log(data);
+	/* this also works
+	$.getJSON('http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&price=226000&output=json&callback=?', function(data){
+		console.log(data);
 	});*/
 });
