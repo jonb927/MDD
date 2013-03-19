@@ -16,14 +16,18 @@ class NewRootsModel extends CI_Model {
 
 	//set the url, number of POST vars, POST data
 	curl_setopt($ch,CURLOPT_URL,$url);
-
+	ob_start();
 	//execute post
-	$result = curl_exec($ch);
+	curl_exec($ch);
 
+	$result = ob_get_contents();
+	ob_end_clean();
 	//close connection
 	curl_close($ch);
 
-	return $result->result_array();
+	//return $chart = new simplexml_load_string($result);
+	//return $response->results->result[0]->zpid;
 
 	}
+	
 }

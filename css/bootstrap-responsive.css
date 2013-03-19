@@ -10,6 +10,60 @@
 p{
   font-size: 18px;
 }
+#login{
+  float:right;
+}
+#loginBg{
+  max-width:979px;
+  margin:0 auto;
+  background:#000 url('/img/NRLogo.jpg') no-repeat 50% 0%;
+  background-size:;
+}
+#main{
+  margin:0 auto;
+}
+#intro{
+  margin:0 auto;
+  width:80%;
+  border-radius:10px;
+  background-color:rgba(255,255,255,.85);
+}
+#intro label{
+font:bold 1em 'Arial';
+color:#6b3f22;
+}
+#intro p{
+  font:bold 1.2em 'Arial';
+color:#427519;
+}
+#signup,#signup2,#signup3,#signup4,#signup5{
+  margin:10px auto;
+  width:60%;
+
+}
+#signup input,#signup2 input,#signup3 input{
+  margin:10px auto;
+  font:italic 1em 'Arial';
+  color:#ccc;
+}
+#bullets{
+  margin:0 auto;
+  width:80%;
+  padding:30px;
+  list-style-type: none;
+}
+#bullets li{
+font:bold 1.5em 'Arial';
+margin:0px auto;
+padding: 25px 0px;
+text-align: center;
+color:#427519;
+}
+#signup5{
+font:bold 1.25em 'Arial';
+text-align: center;
+color:#fff;
+}
 .clearfix {
   *zoom: 1;
 }

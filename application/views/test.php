@@ -6,9 +6,12 @@
 		<p>produces a url of <?php ?><p>
 
 		<form action="?" method="POST">
-    <label for="address">Address:</label>
-        <input type="text" name="address" id="address" maxlength="20" size="20"/><br/>
-    <label for="zip">Zip:</label>
-        <input type="text" name="zip" maxlength="20" size="20" /><br/>
-    <input type="submit" />
-</form>		
+	    	<label for="address">Address:</label>
+	        <input type="text" name="address" id="address" maxlength="20" size="20"/><br/>
+	    	<label for="zip">Zip:</label>
+	        <input type="text" name="zip" maxlength="20" size="20" /><br/>
+	    	<input type="submit" name="Search" value="Search"/>
+		</form>		
+
+		<p><?php echo $sid ?></p>
+		<?php 
