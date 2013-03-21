@@ -7,12 +7,21 @@ class NewRootsModel extends CI_Model {
 	}
 	public function getUsernameEmail($username, $email){
 		$this->db->select('nRusername, nRemail');
-		$query =$this->db->get_where('newRoots', array('nRusername' => $username, 'nRemail' => $email));
+		$query =$this->db->get_where('nRuser', array('nRusername' => $username, 'nRemail' => $email));
+		//print_r($query);
 		
-		foreach ($query->result_array() as $row)
+		foreach ($query->result() as $row)
 		{
+			redirect('/newRoots/homePage/');
+			/*if($row === NULL)
+			
+			{
+				echo 'error';
+			}
 			echo $row['nRusername'];
-			echo $row['nRemail'];
+			echo $row['nRemail'];*/
+			
+
 		}
 	}
 	public function getData(){

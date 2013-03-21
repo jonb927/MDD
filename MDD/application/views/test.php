@@ -12,6 +12,4 @@
 	        <input type="text" name="zip" maxlength="20" size="20" /><br/>
 	    	<input type="submit" name="Search" value="Search"/>
 		</form>		
-
-		<p><?php echo $sid ?></p>
 		<?php 

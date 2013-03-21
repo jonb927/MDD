@@ -1,11 +1,12 @@
-<div class="container-fluid" id="main" class="hidden-desktop">
+<div class="container-fluid" id="main">
 	<div class="row-fluid">
-		<div class="span12 clearfix" >
+		<div class="span12 clearfix">
 			<form action="?" method="POST" class='form-inline' id="login">
-				<input type="text" name="username" id="username" placeholder="username" class="input-small">
-				<input type="text" name="password" id="password" placeholder="password" class="input-small">
+				<input type="text" name="nRusername" id="nRusername" placeholder="username" class="input-small">
+				<input type="text" name="nRemail" id="nRemial" placeholder="password" class="input-small">
 				<button type="submit" class="btn">login</button>	
 		</div>
+	</div>
 		<div class="row-fluid">
 			<div class="span7">
 				<div id="intro">
@@ -48,4 +49,5 @@
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
+

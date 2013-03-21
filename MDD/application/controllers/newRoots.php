@@ -10,11 +10,13 @@ class NewRoots extends CI_Controller {
 	{
 		$data['page_title'] = 'New Roots';//sets page title
 		
-		$username=empty($_POST['nRusername']) ? '' : trim($_POST['nRusername']);
-		$email=empty($_POST['nRemail']) ? '' : trim($_POST['nRemail']);
+		$username = $this->input->post('nRusername');
+		$email = $this->input->post('nRemail');
+		//$username=empty($_POST['nRusername']) ? '' : trim($_POST['nRusername']);
+		//$email=empty($_POST['nRemail']) ? '' : trim($_POST['nRemail']);
 		
 		if(!empty($username) && !empty($email)){
-			$this->newRootsModel->getUsernameEmail();
+			$this->newRootsModel->getUsernameEmail($username, $email);
 		}
 
 
@@ -53,6 +55,13 @@ class NewRoots extends CI_Controller {
 		$this->load->view('test');
 		$this->load->view('footer');
 
+	}
+	public function homePage(){
+		$data['page_title'] = 'New Roots - Homepage';
+
+		$this->load->view('header', $data);
+		$this->load->view('test');
+		$this->load->view('footer');
 	}
 }
 ?>
