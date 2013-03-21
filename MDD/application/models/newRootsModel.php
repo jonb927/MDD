@@ -6,21 +6,24 @@ class NewRootsModel extends CI_Model {
 		$this->load->database();
 	}
 	public function getUsernameEmail($username, $email){
-		$this->db->select('nRusername, nRemail');
-		$query =$this->db->get_where('nRuser', array('nRusername' => $username, 'nRemail' => $email));
-		//print_r($query);
+
+		$this->db->select('nRusername, nRemail');//passes variables into database
+		$query =$this->db->get_where('nRuser', array('nRusername' => $username, 'nRemail' => $email));//querys database
 		
-		foreach ($query->result() as $row)
+		
+		foreach ($query->result() as $row)//if result is empty will not return an object
 		{
-			redirect('/newRoots/homePage/');
-			/*if($row === NULL)
-			
-			{
-				echo 'error';
-			}
-			echo $row['nRusername'];
-			echo $row['nRemail'];*/
-			
+			$newdata = array(
+				'nRusername' => $username,
+				'nRemail' => $email,
+				'logged_in' => TRUE
+				);
+			$this->session->set_userdata($newdata);
+			//$log = TRUE;	
+			//$this->db->set('logged_in' => $log);
+			//$this->db->insert('nRuser')
+
+			redirect('/newRoots/homePage/');// redirects to the home page
 
 		}
 	}
