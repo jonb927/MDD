@@ -12,21 +12,39 @@ class NewRootsModel extends CI_Model {
 		
 		
 		foreach ($query->result() as $row)//if result is empty will not return an object
-		{
+		{	//place new data in session data
 			$newdata = array(
 				'nRusername' => $username,
 				'nRemail' => $email,
 				'logged_in' => TRUE
 				);
 			$this->session->set_userdata($newdata);
-			//$log = TRUE;	
-			//$this->db->set('logged_in' => $log);
-			//$this->db->insert('nRuser')
-
+			
+			//redirect to the home page
 			redirect('/newRoots/homePage/');// redirects to the home page
 
 		}
-	}
+	}// end public function
+	public function logout(){
+		// remove data from session
+		$newdata = array(
+				'nRusername' => "",
+				'nRemail' => "",
+				'logged_in' => FALSE
+				);
+			$this->session->unset_userdata($newdata);
+	}// end public function
+	public function checkUsername($sUusername){
+
+		$this->db->select('nRusername');//passes variable into database
+		$query = $this->db->get_where('nRuser', array('nRusername' => $sUusername));
+		
+		
+			foreach($query->result_array() as $row){
+				echo $row['nRusername'];
+			}
+		
+	}// end public function
 	public function getData(){
 
 	//set POST variables
