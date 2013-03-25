@@ -5,42 +5,98 @@ class NewRoots extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('newRootsModel');
+		$this->load->model('validationModel');
 	}//end constructor
 	public function index()
 	{
 		$data['page_title'] = 'New Roots';//sets page title
-		
-		// LOGIN 
+		// ------ LOGIN 
 		$username = $this->input->post('nRusername');//creates post for username
 		$email = $this->input->post('nRemail');// creates post for email
 		
-		// SIGN UP
-		$sUusername = $this->input->post('nRemail');
-		$sUemail = $this->input->post('nRemail');
-		$sUconfirm_email = $this->input->post('nRconfirm_email');
-
 		$newdata = array(
 				'logged_in' => FALSE
 				);
+
 		$session_id = $this->session->set_userdata($newdata);//adds data of logged in in the session data
-		
+
 		//$session_id = $this->session->all_userdata();
-		//print_r($session_id);
+		//print_r($sUusername);
 		
-		//  LOGIN Direct
+		// --------------------------- LOGIN Direct
 		if(!empty($username) && !empty($email)){
 			$this->newRootsModel->getUsernameEmail($username, $email);//calls function to check username and password	
 		}
-
-		if(!empty($sUusername) && !empty($sUusername) && !empty($sUusername)){
-			$this->newRootsModel->checkUsername($sUusername);
-		}
+	
 		
 		$this->load->view('header', $data);
 		$this->load->view('login');
 		$this->load->view('footer');
+	}//end public function
+	public function signup(){
 
+		$data['page_title'] = 'New Roots - Sign Up';//sets page title
+		
+		$this->load->view('header', $data);
+		$this->load->view('signup');
+		$this->load->view('footer');
+	}
+	public function signupValidation(){
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[2]|max_length[12]|is_unique[nRuser.nRusername]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[nRuser.nRemail]');
+		$this->form_validation->set_rules('emailconf', 'Email Confirmation', 'trim|required|matches[email]');
+		
+		$this->form_validation->set_message('is_unique', "That name is already in use");
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			
+			$this->load->view('signup');
+
+		}
+		else
+		{
+			$key = md5(uniqid());
+			$newdata = array(
+				'nRusername' => $this->input->post('username'),
+				'nRemail' => $this->input->post('email'),
+				'logged_in' => TRUE
+				);
+			$this->session->set_userdata($newdata);
+
+			//print_r($this->session->all_userdata());
+
+			$this->validationModel->createNewUser($key);
+
+			$this->load->view('homepage');
+			/*$this->load->library('email', array('mailtype'=>'html'));
+
+			$this->email->from('jbdeveloper@hotmail.com', "Jon");
+			$this->email->to($this->input->post('email'));
+			$this->email->subject("Confirm your New Roots Account");
+
+			$message = "<p>Thanks for signing up with New Roots!</p>";
+			$message .= "<p><a href='".base_url()."newRoots/register/$key'>Click Here</a> to confirm your account</p>";
+			
+			$this->email->message($message);
+
+			if ($this->email->send()){
+				echo 'Email sent';
+			}else{
+				echo "email Failed!";
+				
+			//$this->load->view('signupSuccess');	*/
+		}
+		
+		
+
+		
 	}// end public function
+	public function register($key){
+
+	}
 	public function getSearch(){
 		
 		/*$address=empty($_POST['address']) ? '' : trim($_POST['address']);
@@ -71,6 +127,7 @@ class NewRoots extends CI_Controller {
 		if($this->session->userdata('logged_in') == TRUE){
 		$this->newRootsModel->logout();
 		}
+		$this->session->sess_destroy();
 
 		$this->load->view('header', $data);
 		$this->load->view('logout', $data);

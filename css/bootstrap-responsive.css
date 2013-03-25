@@ -64,6 +64,44 @@ font:bold 1.25em 'Arial';
 text-align: center;
 color:#fff;
 }
+#homepage{
+  max-width: 1500px;
+  background:#000 repeat url('/img/NRBG2.jpg');
+  background-size: cover;
+}
+nav{
+  height:175px;
+  background:no-repeat url('/img/NRLogoBanner.jpg');
+  background-position:top; 
+  background-size: cover;
+}
+#homepage p{
+  text-align: right;
+}
+#welcome p, #welcome h1{
+  margin: 0 auto;
+  text-align: center;
+}
+#searchbg ul{
+  width: 70%;
+  margin: 0 auto;
+    padding-left: 0;
+}
+#searchbg li{
+  text-align: none;
+  list-style-type: none;
+  display: inline-block;
+  padding:0 2%;
+}
+#city{
+  width:58%;
+} 
+#state{
+  width:8%;
+} 
+#zip{
+  width:20%;
+} 
 .clearfix {
   *zoom: 1;
 }
@@ -122,6 +160,13 @@ color:#fff;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
+  nav{
+    width: 100%;
+  height:180px;
+  background:no-repeat url('/img/NRLogoBanner.jpg');
+  background-position:top; 
+  background-size: contain;
+  }
   .hidden-desktop {
     display: inherit !important;
   }
@@ -149,6 +194,13 @@ color:#fff;
   .hidden-phone {
     display: none !important;
   }
+  nav{
+    width: 100%;
+  height:175px;
+  background:no-repeat url('/img/NRLogoBanner.jpg');
+  background-position:top; 
+  background-size: contain;
+  }
 }
 
 .visible-print {
@@ -165,6 +217,10 @@ color:#fff;
 }
 
 @media (min-width: 1200px) {
+  nav{
+    width: 100%;
+  height:200px;
+  }
   .row {
     margin-left: -30px;
     *zoom: 1;
@@ -857,8 +913,7 @@ color:#fff;
 
 @media (max-width: 767px) {
   body {
-    padding-right: 20px;
-    padding-left: 20px;
+    margin:0 auto;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom,
@@ -1007,6 +1062,7 @@ color:#fff;
 
 @media (max-width: 979px) {
   body {
+    margin:0 auto;
     padding-top: 0;
   }
   .navbar-fixed-top,
@@ -1158,6 +1214,9 @@ color:#fff;
 }
 
 @media (min-width: 980px) {
+  body{
+    margin:0 auto;
+  }
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;

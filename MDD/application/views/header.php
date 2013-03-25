@@ -7,5 +7,5 @@
 	<link rel="stylesheet" href="/css/bootstrap-responsive.css">
 	
 </head>
-	<body id="loginBg">
+	
 		
