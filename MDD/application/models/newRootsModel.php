@@ -63,12 +63,10 @@ class NewRootsModel extends CI_Model {
 	ob_end_clean();
 	//close connection
 	curl_close($ch);
-	
-	$xml = simplexml_load_string($result);
+	return $result;
+	//$xml = simplexml_load_string($result);
 
-	$address = $xml->response->results->result[0]->zestimate->amount;
-	
-	
+	//$address = $xml->response->results->result[0]->zestimate->amount;
 	
 	//echo "<pre>"; var_dump($xml); echo "</pre>";
 	//return $chart = new simplexml_load_string($result);

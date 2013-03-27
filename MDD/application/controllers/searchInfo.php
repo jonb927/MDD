@@ -12,11 +12,6 @@ class SearchInfo extends CI_Controller {
 		$data['page_title'] = 'New Roots - Homepage';//set title of homepage
 		$data['user'] = $this->session->userdata('nRusername');//sets username
 		$data['default'] = site_url('newRoots/logout');//links to default page
-
-		$data['home'] = site_url('searchInfo');
-		$data['school'] = site_url('searchInfo/getSchoolSearch');
-		$data['mortgage'] = site_url('searchInfo/getMortgageCalc');
-		$data['profile'] = site_url('searchInfo/getProfile');
 			
 		$this->load->view('header', $data);
 		$this->load->view('nav', $data);
@@ -33,10 +28,37 @@ class SearchInfo extends CI_Controller {
 		// message if username or email already exists
 		if ($this->form_validation->run())
 		{
-			// create new user
-			echo $this->newRootsModel->getData();
-
+			// get result and change to xml format
+			$result = $this->newRootsModel->getData();
+			$xml = simplexml_load_string($result);
 			
+			setlocale(LC_MONETARY, 'en_US');
+			//money_format('%.0n', );
+
+
+			$data['address'] = $this->input->post('address');
+			$data['csz'] = $this->input->post('citystatezip');
+			$data['amount'] = $xml->response->results->result[0]->zestimate->amount;
+			$data['market'] = $xml->response->results->result[0]->zestimate->attributes->deprecated;
+
+			if($xml->response->results->result[0]->zestimate->attributes->deprecated == TRUE){
+				$data['market'] = 'home values in this are have depreciated';
+			}else{
+				$data['market'] = 'home values in this area have not depreciated';
+			}
+
+
+			$data['page_title'] = 'New Roots - Homepage';//set title of homepage
+			$data['user'] = $this->session->userdata('nRusername');//sets username
+			$data['default'] = site_url('newRoots/logout');//links to default page
+				
+			$this->load->view('header', $data);
+			$this->load->view('nav', $data);
+			$this->load->view('home_info');
+			$this->load->view('result', $data);
+			$this->load->view('footer');
+			
+			//var_dump($address);
 			//redirect('/newRoots/homePage/');
 		}
 		else
@@ -45,6 +67,7 @@ class SearchInfo extends CI_Controller {
 		
 
 		}
+
 	}
 		public function schoolSearch(){
 		$data['page_title'] = 'New Roots - Homepage';//set title of homepage
