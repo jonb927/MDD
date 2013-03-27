@@ -1,4 +1,4 @@
-<body id="loginBg">
+<body id="loginBg" class="hidden-desktop">
 <div class="container-fluid" id="main">
 	<div id="logout">		
 		<p>You have successfully logged off.</p>

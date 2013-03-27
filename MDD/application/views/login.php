@@ -1,4 +1,4 @@
-<body id="loginBg">
+<body id="loginBg" class="hidden-desktop">
 <div class="container-fluid" id="main">
 	<div class="row-fluid">
 		<div class="span12 clearfix">

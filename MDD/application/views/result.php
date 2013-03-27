@@ -1,0 +1,1 @@
+<div><p><?php echo $amount ?></p></div>

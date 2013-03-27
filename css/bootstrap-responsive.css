@@ -10,6 +10,11 @@
 p{
   font-size: 18px;
 }
+h1, h2{
+  font:bold 1em 'Trajan Pro';
+  text-align: center;
+  color:#ae0025;
+}
 #login{
   float:right;
 }
@@ -70,14 +75,12 @@ color:#fff;
   background-size: cover;
 }
 nav{
-  height:175px;
+  height:20%;
   background:no-repeat url('/img/NRLogoBanner.jpg');
   background-position:top; 
   background-size: cover;
 }
-#homepage p{
-  text-align: right;
-}
+
 #welcome p, #welcome h1{
   margin: 0 auto;
   text-align: center;
@@ -91,17 +94,57 @@ nav{
   text-align: none;
   list-style-type: none;
   display: inline-block;
+  margin: 5px 0;
   padding:0 2%;
 }
-#city{
-  width:58%;
-} 
-#state{
-  width:8%;
-} 
-#zip{
-  width:20%;
-} 
+#searchbg h5{
+margin: 0 auto;
+}
+#searchbg ul{
+  background:#f2bf1f;
+  box-shadow: 0 1px 5px 2px #ddd;
+  border-radius:10px;
+}
+
+#searchsub button{
+  margin: 1% 30%;
+  height:30px;
+  width: 175px;
+}
+#welcome{
+  font:bold 2em 'Times New Roman';
+}
+#links{
+  list-style-type: none;
+}
+.menu ul{
+background-image:url('/img/greenbtn2.jpg');
+list-style-type: none;
+border-radius: 10px;
+box-shadow: 0px 1px 2px 2px #ddd;
+margin: 0 auto;
+padding: 0;
+}
+.menu li{
+width: 25%;
+float: left;
+list-style-type: none;
+text-align: center;
+margin: 0 auto;
+padding: 0;
+}
+.menu a{
+font:bold .625em 'Trajan Pro';
+line-height:25px;
+color: #fff;
+margin: 0;
+text-decoration: none;
+display: block;
+}
+.menu a:hover{
+background-image:url('/img/greenbtnroll.jpg');
+border-radius: 10px;
+}
 .clearfix {
   *zoom: 1;
 }
@@ -159,7 +202,7 @@ nav{
   display: inherit !important;
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 946px) {
   nav{
     width: 100%;
   height:180px;
@@ -181,7 +224,7 @@ nav{
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .hidden-desktop {
     display: inherit !important;
   }
@@ -570,7 +613,7 @@ nav{
   }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 946px) {
   .row {
     margin-left: -20px;
     *zoom: 1;
@@ -911,9 +954,12 @@ nav{
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   body {
     margin:0 auto;
+  }
+  nav{
+    height:150px;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom,
@@ -1008,7 +1054,10 @@ nav{
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 568px) {
+  nav{
+    height:100px;
+  }
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }
@@ -1060,7 +1109,7 @@ nav{
   }
 }
 
-@media (max-width: 979px) {
+@media (max-width: 946px) {
   body {
     margin:0 auto;
     padding-top: 0;
@@ -1213,9 +1262,12 @@ nav{
   }
 }
 
-@media (min-width: 980px) {
+@media (min-width: 947px) {
   body{
     margin:0 auto;
+  }
+  nav{
+    height:200px;
   }
   .nav-collapse.collapse {
     height: auto !important;

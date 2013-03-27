@@ -20,15 +20,5 @@ class ValidationModel extends CI_Model {
 			return false;
 		}
 	}
-	public function verifyKey($key){
-
-		$this->db->where('nRkey', $key);
-		$query = $this->db->get('newRoots');
-		if($query->num_rows() == 1){
-			return true;
-		}else{
-			return false;
-		}
-	}
 	
 }
