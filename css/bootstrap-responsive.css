@@ -90,32 +90,68 @@ nav{
   margin: 0 auto;
     padding-left: 0;
 }
-#searchbg li{
-  text-align: none;
-  list-style-type: none;
+.hsearch{
   display: inline-block;
-  margin: 5px 0;
-  padding:0 2%;
+  margin:0 auto;
+  width:50%;
+  float: left;
 }
-#searchbg h5{
-margin: 0 auto;
+.hsearch h5{
+
 }
-#searchbg ul{
+.hsearch input{
+   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+    border-radius: 5px;
+    border:2px solid #e7b402;
+    font: 1em 'Times New Roman';
+    height: 25px;
+    margin: 0 2.5%;
+    padding: 0 0;
+    width: 95%;
+}
+#homeResults h5{
+margin: 0 5%;
+color: #fff;
+font: bold .75em 'Trajan Pro';
+padding:5px 0;
+}
+#homeResults form{
   background:#f2bf1f;
-  box-shadow: 0 1px 5px 2px #ddd;
+  box-shadow: 0 1px 5px 2px #ccc;
   border-radius:10px;
+  margin: 0 auto;
 }
 
-#searchsub button{
-  margin: 1% 30%;
-  height:30px;
-  width: 175px;
+#submit{
+  width:100%;
+
+}
+#submit input{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font: bold 1em 'Trajan Pro';
+    color:#fff;
+    height: 25px;
+    margin: 2.5% 30%;
+    width: 40%;
+    border-radius:5px;
+    border:none;
+    background-image:url('/img/greenbtn2.jpg');
+    box-shadow: 0 1px 2px 2px #e7b402;
+}
+#submit input:hover{
+background-image:url('/img/greenbtnroll.jpg');
+border-radius: 5px;
 }
 #welcome{
   font:bold 2em 'Times New Roman';
 }
 #links{
   list-style-type: none;
+}
+#homesearch{
+  border
 }
 .menu ul{
 background-image:url('/img/greenbtn2.jpg');
@@ -1111,7 +1147,7 @@ border-radius: 10px;
 
 @media (max-width: 946px) {
   body {
-    margin:0 auto;
+    margin:0 2%;
     padding-top: 0;
   }
   .navbar-fixed-top,

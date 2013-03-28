@@ -32,13 +32,13 @@ class NewRootsModel extends CI_Model {
 				);
 			$this->session->unset_userdata($newdata);
 	}// end public function
-	public function getData(){
-		$address  = $this->input->post('address');
+	public function getData($url){
+		//$address  = $this->input->post('address');
 		
-		$csz = $this->input->post('citystatezip');
+		//$csz = $this->input->post('citystatezip');
 		
-		$ZID = 'X1-ZWz1dff33xsnwr_1vfab';
-		$url = 'http://www.zillow.com/webservice/GetSearchResults.htm?zws-id='.$ZID.'&citystatezip='.$csz.'&address='.rawurlencode($address);
+		//$ZID = 'X1-ZWz1dff33xsnwr_1vfab';
+		//$url = 'http://www.zillow.com/webservice/GetSearchResults.htm?zws-id='.$ZID.'&citystatezip='.$csz.'&address='.rawurlencode($address);
 			
 		//set POST variables
 		//$url ='http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=X1-ZWz1dff33xsnwr_1vfab&citystatezip=DE&address=226 Camerton Lane';
@@ -63,16 +63,16 @@ class NewRootsModel extends CI_Model {
 	ob_end_clean();
 	//close connection
 	curl_close($ch);
-	return $result;
-	//$xml = simplexml_load_string($result);
+	
+
+	$xml = simplexml_load_string($result);
 
 	//$address = $xml->response->results->result[0]->zestimate->amount;
 	
 	//echo "<pre>"; var_dump($xml); echo "</pre>";
 	//return $chart = new simplexml_load_string($result);
 	//return $response->results->result[0]->zpid;
-	
-	
+	return $result;
 	}
 	
 }
