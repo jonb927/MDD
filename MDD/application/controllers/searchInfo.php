@@ -81,11 +81,8 @@ class SearchInfo extends CI_Controller {
 			//var_dump($address);
 			//redirect('/newRoots/homePage/');
 		}
-		
-		
-
 	}
-		public function schoolSearch(){
+	public function schoolSearch(){
 		$data['page_title'] = 'New Roots - Homepage';//set title of homepage
 		$data['user'] = $this->session->userdata('nRusername');//sets username
 		$data['default'] = site_url('newRoots/logout');//links to default page
@@ -95,6 +92,58 @@ class SearchInfo extends CI_Controller {
 		$this->load->view('school_info');
 		$this->load->view('footer');
 	}//end of public function
+	public function getSchoolSearch(){
+		$this->load->library('form_validation');
+		// validats form input
+		$this->form_validation->set_rules('address', 'Address', 'trim|required');
+		$this->form_validation->set_rules('city', 'City', 'trim|required');
+		$this->form_validation->set_rules('state', 'State', 'trim|required');
+		
+
+
+		if ($this->form_validation->run())
+		{	
+			$data['address'] = $this->input->post('address');//get post data
+			$data['city'] = $this->input->post('city');//get post data
+			$data['state'] = $this->input->post('state');//get post data				
+			$gsid = '2ytcxzypycsu5zatgvtvmwxx';
+			
+			$url = 'http://api.greatschools.org/schools/nearby?key='.$gsid.'&amp;address='.urlencode($data['address']).'&city='.$data['city'].'&state='.$data['state'].'&radius=10&limit=8';
+			print_r($url);
+			$result = $this->newRootsModel->getData($url);
+			$xml = simplexml_load_string($result);
+
+			$data['page_title'] = 'New Roots - Homepage';//set title of homepage
+			$data['user'] = $this->session->userdata('nRusername');//sets username
+			$data['default'] = site_url('newRoots/logout');//links to default page
+
+			$this->load->view('header', $data);
+			$this->load->view('nav');
+			$this->load->view('school_info');
+			
+			for($i=0; $i<8; $i++){
+				$data['school'] = $xml->school[$i]->name;
+				$data['stype'] = $xml->school[$i]->type;
+				$data['grades'] = $xml->school[$i]->gradeRange;
+				$data['saddress'] = $xml->school[$i]->address;
+				$data['srating'] = $xml->school[$i]->gsRating;
+
+				echo $data['school'];
+				echo $data['stype'];
+				echo $data['grades'];
+				echo $data['saddress'];
+				echo $data['srating'];
+
+
+
+			}
+			$this->load->view('footer');
+		}else
+			echo 'error';
+		}
+		
+	}//end of public function
+	
 	public function mortgageCalc(){
 		$data['page_title'] = 'New Roots - Homepage';//set title of homepage
 		$data['user'] = $this->session->userdata('nRusername');//sets username

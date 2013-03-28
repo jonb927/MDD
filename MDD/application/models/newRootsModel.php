@@ -69,7 +69,7 @@ class NewRootsModel extends CI_Model {
 
 	//$address = $xml->response->results->result[0]->zestimate->amount;
 	
-	//echo "<pre>"; var_dump($xml); echo "</pre>";
+	echo "<pre>"; var_dump($xml); echo "</pre>";
 	//return $chart = new simplexml_load_string($result);
 	//return $response->results->result[0]->zpid;
 	return $result;
