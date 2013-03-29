@@ -4,7 +4,7 @@
 </div>
 </div>
 
-<div class="span12 clearfix" id="homeResults">
+<div class="span12 clearfix" id="homeForm">
 	<p>New Roots Home Evaluation tool is simple. Just put in an address followed by a city, state or zipcode to get property information!</p>
 
 		<?php echo validation_errors(); ?>
@@ -17,7 +17,7 @@
 		<h5>City, State, or Zip</h5>
 		<input type="text" name="citystatezip" value ="<?php echo set_value('citystatezip')?>"  placeholder="12345"/>
 		</div>
-		<div id="submit"><input type="submit" value ="Submit"/></div>
+		<div class="submit"><input type="submit" value ="Submit"/></div>
 
 	</form>
 
