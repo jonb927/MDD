@@ -5,16 +5,59 @@ class NewRootsModel extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
-	public function getUsernameEmail($username, $email){
+	public function getPassword($password){
+		
+		//$this->db->select('nRpassword', 'nRuserId');//passes variables into database
+		
+		$query =$this->db->get_where('nRuser', array('nRpassword' => $password));//querys database
+		$row = $query->result_array();
+		print_r($row);
+		if ($row >0){
+			return $row[0]['nRuserId'];
+		}else{
+			return false;
+		}
+	}/*
+	public function getEmail($email){
+		$this->db->select('nRemail');//passes variables into database
+		$query =$this->db->get_where('nRuser', array('nRemail' => $email));//querys database
+
+		$row = $query->result();
+		if($row > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}*/
+	public function updatePassword($npass, $id){
+		$data = array(
+			'nRpassword' => $npass  // get new password 
+			);
+		$this->db->where('nRuserId', $id); // check id
+		$this->db->update('nRuser', $data);// change password
+
+		$data['page_title'] = 'New Roots - Update';//set title of homepage
+		$data['user'] = $this->session->userdata('nRusername');//sets username
+		$data['homepage'] = site_url('newRoots/homePage');//links to default page
+
+		$this->load->view('header', $data);
+		$this->load->view('nav', $data);
+		$this->load->view('pass_success', $data);
+		$this->load->view('footer');
+
+	}
+	public function updateMail(){
+
+	}
+	public function getUsernamePass($username, $password){
 
 		$this->db->select('nRusername, nRemail');//passes variables into database
-		$query =$this->db->get_where('nRuser', array('nRusername' => $username, 'nRemail' => $email));//querys database
+		$query =$this->db->get_where('nRuser', array('nRusername' => $username, 'nRpassword' => $password));//querys database
 
 		foreach ($query->result() as $row)//if result is empty will not return an object
 		{	//place new data in session data
 			$newdata = array(
 				'nRusername' => $username,
-				'nRemail' => $email,
 				'logged_in' => TRUE
 				);
 			$this->session->set_userdata($newdata);
@@ -48,13 +91,6 @@ class NewRootsModel extends CI_Model {
 	//close connection
 	curl_close($ch);
 	
-	//$xml = simplexml_load_string($result);
-
-	//$address = $xml->response->results->result[0]->zestimate->amount;
-	
-	//"<pre>"; var_dump($xml); echo "</pre>";
-	//return $chart = new simplexml_load_string($result);
-	//return $response->results->result[0]->zpid;
 	return $result;
 	}
 	

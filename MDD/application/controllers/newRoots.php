@@ -12,8 +12,8 @@ class NewRoots extends CI_Controller {
 		$data['page_title'] = 'New Roots';//sets page title
 		// ------ LOGIN 
 		$username = $this->input->post('nRusername');//creates post for username
-		$email = $this->input->post('nRemail');// creates post for email
-		
+		$password = $this->input->post('nRpassword');// creates post for password
+		$pass = md5($password);
 		$newdata = array(
 				'logged_in' => FALSE
 				);
@@ -24,8 +24,8 @@ class NewRoots extends CI_Controller {
 		//print_r($sUusername);
 		
 		// --------------------------- LOGIN Direct
-		if(!empty($username) && !empty($email)){
-			$this->newRootsModel->getUsernameEmail($username, $email);//calls function to check username and password	
+		if(!empty($username) && !empty($password)){
+			$this->newRootsModel->getUsernamePass($username, $pass);//calls function to check username and password	
 		}
 	
 		// -------------------------Load Views
@@ -47,8 +47,10 @@ class NewRoots extends CI_Controller {
 		
 		// validats form input
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[2]|max_length[12]|is_unique[nRuser.nRusername]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|max_length[12]|is_unique[nRuser.nRpassword]|md5');
+		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|matches[password]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[nRuser.nRemail]');
-		$this->form_validation->set_rules('emailconf', 'Email Confirmation', 'trim|required|matches[email]');
+		
 		
 		// message if username or email already exists
 		$this->form_validation->set_message('is_unique', "That name is already in use");
@@ -69,7 +71,7 @@ class NewRoots extends CI_Controller {
 			// create new user
 			$this->validationModel->createNewUser($key);
 
-			$data['page_title'] = 'New Roots - Signupp Success';//set title of page
+			$data['page_title'] = 'New Roots - Signup Success';//set title of page
 			$data['user'] = $this->session->userdata('nRusername');//sets username
 			$data['homepage'] = site_url('newRoots/homePage');//links to home page
 			//load home page

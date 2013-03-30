@@ -75,7 +75,7 @@ class SearchInfo extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->view('nav', $data);
 			$this->load->view('home_info');
-			$this->load->view('result', $data);
+			$this->load->view('home_result', $data);
 			$this->load->view('footer');
 			}
 			//var_dump($address);
@@ -157,6 +157,7 @@ class SearchInfo extends CI_Controller {
 		
 		// validats form input
 		$this->form_validation->set_rules('price', 'Sale Price', 'trim|required');
+		$this->form_validation->set_rules('downpay', 'Money Down', 'trim|required|alpha_numeric');
 		$this->form_validation->set_rules('zip', 'Zip', 'trim|required|alpha_numeric');
 		
 		// message if username or email already exists
@@ -165,45 +166,42 @@ class SearchInfo extends CI_Controller {
 			echo 'error';
 		}else{
 			$data['price'] = $this->input->post('price');//get post data
-			$data['zip'] = $this->input->post('zip');//get post data		
+			$data['zip'] = $this->input->post('zip');//get post data
+			$data['downpay'] = $this->input->post('downpay');//get post data		
 			$ZID = 'X1-ZWz1dff33xsnwr_1vfab';
 			//create URL
-			$url = 'http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id='.$ZID.'&price='.$data['price'].'&zip='.$data['zip'].'&dollarsdown=10000&output=json';		
+			$url = 'http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id='.$ZID.'&price='.$data['price'].'&zip='.$data['zip'].'&dollarsdown='.$data['downpay'].'&output=json';		
 
 			// get result and change to xml format
 			$result = $this->newRootsModel->getData($url);
-			$data = json_decode($result);
-			//$xml = simplexml_load_string($result);
-			var_dump($result);
-			echo $data->response->thirtyYearFixed->rate;
-			//traverse xml data
-		 	//$xml->response->payment->attributes[0]->loanType;
-			//print_r($data['loan1']);
+			$mort = json_decode($result);
 			
-			/*$data['lamount'] = $xml->response->results->result[0]->zestimate->valuationRange->low;
-			$data['hamount'] = $xml->response->results->result[0]->zestimate->valuationRange->high;
+			// set money format
+			setlocale(LC_MONETARY, 'en_US');
 
-			if($xml->response->results->result[0]->zestimate->attributes->deprecated == 0){
-				$data['market'] = 'Home values in this area have depreciated.';
-			}else{
-				$data['market'] = 'Home values in this area have not depreciated.';
-			}
+			$data['rate30'] = $mort->response->thirtyYearFixed->rate;
+			$data['pay30'] = $mort->response->thirtyYearFixed->monthlyPrincipalAndInterest;
+			$data['pmi30'] = $mort->response->thirtyYearFixed->monthlyMortgageInsurance;
+			$data['rate15'] = $mort->response->fifteenYearFixed->rate;
+			$data['pay15'] = $mort->response->fifteenYearFixed->monthlyPrincipalAndInterest;
+			$data['pmi15'] = $mort->response->fifteenYearFixed->monthlyMortgageInsurance;
 
 			//load response page
-			$data['page_title'] = 'New Roots - Homepage';//set title of homepage
+			$data['page_title'] = 'New Roots - Mortgage Calc';//set title of homepage
 			$data['user'] = $this->session->userdata('nRusername');//sets username
 			$data['default'] = site_url('newRoots/logout');//links to default page
 				
 			$this->load->view('header', $data);
 			$this->load->view('nav', $data);
-			$this->load->view('home_info');
-			$this->load->view('result', $data);
+			$this->load->view('mortgage_info');
+			$this->load->view('mortgage_result', $data);
 			$this->load->view('footer');
-			*/}
+			}
 	}
 	public function profile(){
-		$data['page_title'] = 'New Roots - Homepage';//set title of homepage
+		$data['page_title'] = 'New Roots - Profile';//set title of homepage
 		$data['user'] = $this->session->userdata('nRusername');//sets username
+		$data['email'] = $this->session->userdata('nRemail');//sets username
 		$data['default'] = site_url('newRoots/logout');//links to default page
 
 		$this->load->view('header', $data);
@@ -211,5 +209,54 @@ class SearchInfo extends CI_Controller {
 		$this->load->view('profile');
 		$this->load->view('footer');
 	}//end of public function
+	public function changePass(){
+		$data['page_title'] = 'New Roots - Update';//set title of homepage
+		$data['user'] = $this->session->userdata('nRusername');//sets username
+		$data['default'] = site_url('newRoots/logout');//links to default page
+
+		$this->load->view('header', $data);
+		$this->load->view('nav', $data);
+		$this->load->view('update_pass', $data);
+		$this->load->view('footer');
+	}
+	public function updatePass(){
+		//validate form
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+		$this->form_validation->set_rules('npassword', 'New Password', 'trim|required|min_length[5]|max_length[12]|is_unique[nRuser.nRpassword]|md5');
+		$this->form_validation->set_rules('cnpassword', 'New Password', 'trim|required|matches[npassword]');
+		
+		//$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+		$password = $this->input->post('password');//creates post for password
+		$npassword = $this->input->post('npassword');//creates post for new password
+		$cnpassword = $this->input->post('cnpassword');//creates post for confirmed password
+		$pass = md5($password);
+		$npass = md5($npassword);
+		//var_dump($pass);
+		$id = $this->newRootsModel->getPassword($pass);//calls function to check password	
+		var_dump($id);
+		$this->newRootsModel->updatePassword($npass, $id);
+		
+		}// end of public function
+	public function passSuccess(){
+		$data['page_title'] = 'New Roots - Update';//set title of homepage
+		$data['user'] = $this->session->userdata('nRusername');//sets username
+		$data['default'] = site_url('newRoots/logout');//links to default page
+
+		$this->load->view('header', $data);
+		$this->load->view('nav', $data);
+		$this->load->view('pass_success');
+		$this->load->view('footer');
+	}	
+	public function changeEmail(){
+		$data['page_title'] = 'New Roots - Update';//set title of homepage
+		$data['user'] = $this->session->userdata('nRusername');//sets username
+		//$data['email'] = $this->session->userdata('nRemail');//sets username
+		$data['default'] = site_url('newRoots/logout');//links to default page
+
+		$this->load->view('header', $data);
+		$this->load->view('nav', $data);
+		$this->load->view('update_email', $data);
+		$this->load->view('footer');
+	}// end of public function*/
 }
 ?>

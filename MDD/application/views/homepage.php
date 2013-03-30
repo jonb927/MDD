@@ -1,4 +1,4 @@
-<div class="span12 clearfix">
+<div class="span12 clearfix" id="log">
 	<p>Welcome, <span><?php echo $user ?></span>! <!--welcome's session user -->
 	<a href="<?php echo $default ?>">logout</a></p>	
 </div>

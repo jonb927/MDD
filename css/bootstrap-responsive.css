@@ -15,9 +15,6 @@ h1, h2{
   text-align: center;
   color:#ae0025;
 }
-#login{
-  float:right;
-}
 #loginBg{
   max-width:979px;
   margin:0 auto;
@@ -27,24 +24,95 @@ h1, h2{
 #main{
   margin:0 auto;
 }
+
+.login {
+  margin:0 auto;
+  width: 50%;
+  float: left;
+}
+.login input{
+  margin:0 auto;
+  width: 90%;
+  margin:0 5%;
+}
+.log{
+  font:bold 1em 'Times New Roman';
+  color:#6b3f22;
+  text-shadow: 1px 0 #aaa;
+}
+.log a{
+  font:bold 1em 'Times New Roman';
+  color:#ae0025;
+  text-decoration: none;
+}
+#ssubmit{
+  width:100%;
+  margin:2% auto;
+}
+#ssubmit input:hover{
+background-image:url('/img/greenbtnroll.jpg');
+border-radius: 5px;
+}
+#ssubmit input{
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font: bold 1em 'Trajan Pro';
+    color:#fff;
+    height: 25px;
+    margin: 2.5% 30%;
+    width: 40%;
+    border-radius:5px;
+    border:none;
+    background-image:url('/img/greenbtn2.jpg');
+    box-shadow: 0 1px 2px 2px #bbb;
+}
+#lsubmit{
+  width:100%;
+}
+#lsubmit input:hover{
+background-image:url('/img/greenbtnroll.jpg');
+border-radius: 5px;
+}
+#lsubmit input{
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font: bold 1em 'Trajan Pro';
+    color:#fff;
+    height: 25px;
+    margin: 2.5% 30%;
+    width: 40%;
+    border-radius:5px;
+    border:none;
+    background-image:url('/img/greenbtn2.jpg');
+    box-shadow: 0 1px 2px 2px #bbb;
+}
 #intro{
   margin:0 auto;
   width:80%;
   border-radius:10px;
   background-color:rgba(255,255,255,.85);
 }
+#intro h5{
+font:bold 1.25em 'Arial';
+color:#6b3f22;
+margin:10px 10%;
+}
 #intro label{
 font:bold 1em 'Arial';
 color:#6b3f22;
 }
 #intro p{
-  font:bold 1.2em 'Arial';
+font:bold 1.4em 'Arial';
 color:#427519;
+text-align: center;
 }
-#signup,#signup2,#signup3,#signup4,#signup5{
-  margin:10px auto;
-  width:60%;
-
+#intro form{
+  margin: 0 auto;
+  width:100%;
+}
+#intro input{
+width:80%;
+margin:0 10%;
 }
 #signup input,#signup2 input,#signup3 input{
   margin:10px auto;
@@ -69,6 +137,20 @@ font:bold 1.25em 'Arial';
 text-align: center;
 color:#fff;
 }
+#success a{
+text-decoration: none:;
+}
+#success a:visited{
+  color:#c49900;
+}
+#success a:hover{
+  color:#69a823;
+}
+#success{
+  font:bold 4em 'Arial';
+text-align: center;
+color:#fff;
+}
 #homepage{
   max-width: 1500px;
   background:#000 repeat url('/img/NRBG2.jpg');
@@ -90,15 +172,29 @@ nav{
   margin: 0 auto;
     padding-left: 0;
 }
-.hsearch, .ssearch, .msearch{
+.hsearch{
   display: inline-block;
   margin:0 auto;
   width:50%;
   float: left;
 }
-.hsearch h5{
-
-}
+ .ssearch{
+  display: inline-block;
+  margin:0 auto;
+  width:42.5%;
+  float: left;
+ }
+ .msearch{
+display: inline-block;
+  margin:0 auto;
+  width:33.333333%;
+  float: left;
+ }
+ #sstate{
+  display: inline-block;
+  margin:0 auto;
+  width:11%;
+ }
 .hsearch input, .ssearch input, .msearch input{
    -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -110,17 +206,9 @@ nav{
     padding: 0 0;
     width: 95%;
 }
-
-.ssearch input{
-   -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-    border-radius: 5px;
-    border:2px solid #e7b402;
-    font: 1em 'Times New Roman';
-    height: 25px;
-    margin: 0 2.5%;
-    padding: 0 0;
-    width: 95%;
+.open{
+font:bold 1.3em 'Times New Roman';
+color:#000;
 }
 #homeForm h5, #schoolForm h5, #mortgageForm h5{
 margin: 0 5%;
@@ -133,6 +221,7 @@ padding:5px 0;
   box-shadow: 0 1px 5px 2px #ccc;
   border-radius:10px;
   margin: 0 auto;
+  width:100%;
 }
 .submit{
   width:100%;

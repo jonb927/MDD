@@ -9,6 +9,7 @@ class ValidationModel extends CI_Model {
 
 		$data = array(
 		'nRusername' => $this->input->post('username'),
+		'nRpassword' => $this->input->post('password'),
 		'nRemail' => $this->input->post('email'),
 		'nRkey' => $key
 		);
